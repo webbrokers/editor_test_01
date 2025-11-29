@@ -104,7 +104,7 @@ export default function PropertiesPanel() {
           value={(selectedNode.data as any).age?.min ?? ''}
           onChange={(e) =>
             updateNodeData(selectedNode.id, {
-              age: { ...selectedNode.data.age, min: parseInt(e.target.value) || 0 },
+              age: { ...((selectedNode.data as any)?.age || {}), min: parseInt(e.target.value) || 0 },
             })
           }
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-secondary/50"
@@ -119,7 +119,7 @@ export default function PropertiesPanel() {
           value={(selectedNode.data as any).age?.max ?? ''}
           onChange={(e) =>
             updateNodeData(selectedNode.id, {
-              age: { ...selectedNode.data.age, max: parseInt(e.target.value) || 100 },
+              age: { ...((selectedNode.data as any)?.age || {}), max: parseInt(e.target.value) || 100 },
             })
           }
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-secondary/50"
