@@ -1,34 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --secondary: #8b5cf6;
-  --accent: #ec4899;
+  --primary: #1f9f7a;
+  --primary-dark: #0f7e5f;
+  --secondary: #0ea5e9;
+  --accent: #f59e0b;
+  --muted: #e6e9f0;
 
-  /* Плавные переходы между темами */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Светлая тема (по умолчанию) */
 :root[data-theme="light"] {
-  --background: #f8f9fa;
-  --foreground: #1a1a2e;
-  --card-bg: rgba(255, 255, 255, 0.9);
-  --border: rgba(0, 0, 0, 0.1);
-  --glow: rgba(99, 102, 241, 0.2);
-  --gradient-start: #f8f9fa;
-  --gradient-end: #e9ecef;
+  --background: #f5f7fb;
+  --foreground: #0f172a;
+  --card-bg: rgba(255, 255, 255, 0.94);
+  --border: rgba(15, 23, 42, 0.07);
+  --glow: rgba(31, 159, 122, 0.22);
+  --gradient-start: #f7f9fc;
+  --gradient-end: #eef1f7;
 }
 
-/* Тёмная тема */
 :root[data-theme="dark"] {
   --background: #0a0a0f;
   --foreground: #f5f5f7;
-  --card-bg: rgba(17, 17, 27, 0.8);
-  --border: rgba(255, 255, 255, 0.1);
-  --glow: rgba(99, 102, 241, 0.3);
+  --card-bg: rgba(17, 17, 27, 0.85);
+  --border: rgba(255, 255, 255, 0.08);
+  --glow: rgba(31, 159, 122, 0.35);
   --gradient-start: #0a0a0f;
   --gradient-end: #1a1a2e;
 }
@@ -39,7 +37,7 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
-  --font-sans: 'Inter', var(--font-geist-sans);
+  --font-sans: 'Manrope', var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -50,51 +48,35 @@
 }
 
 body {
-  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(31, 159, 122, 0.04), transparent 32%),
+    radial-gradient(circle at 80% 0%, rgba(14, 165, 233, 0.05), transparent 36%),
+    linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
   color: var(--foreground);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Glassmorphism */
 .glass {
   background: var(--card-bg);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(18px);
   border: 1px solid var(--border);
   border-radius: 16px;
 }
 
-/* Парящая анимация для бликов */
 @keyframes float {
-
   0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
+  100% { transform: translateY(0px); }
+  50% { transform: translateY(-18px); }
 }
 
 @keyframes glow {
-
   0%,
-  100% {
-    box-shadow: 0 0 20px var(--glow);
-  }
-
-  50% {
-    box-shadow: 0 0 40px var(--glow), 0 0 60px var(--glow);
-  }
+  100% { box-shadow: 0 0 20px var(--glow); }
+  50% { box-shadow: 0 0 40px var(--glow), 0 0 60px var(--glow); }
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-glow {
-  animation: glow 3s ease-in-out infinite;
-}
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-glow { animation: glow 3s ease-in-out infinite; }

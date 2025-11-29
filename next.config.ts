@@ -1,13 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Статический экспорт только для продакшена (при сборке)
-  ...(process.env.NODE_ENV === 'production' ? { output: 'export' } : {}),
+  // Динамические маршруты (например, /editor/[id]) требуют серверной сборки, поэтому убираем static export.
+  output: "standalone",
   images: {
     unoptimized: true,
   },
-  basePath: '/editor_test_01',
-  trailingSlash: true,
 };
 
 export default nextConfig;
