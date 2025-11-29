@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Админ-панель программы лояльности",
-  description: "Современная панель управления программой лояльности с визуальным редактором сценариев",
+  title: "Панель лояльности — визуальный редактор сценариев",
+  description:
+    "Админка для построения сценариев лояльности: drag-and-drop узлы, шаблоны графов, автосохранение и двухтемный интерфейс.",
 };
 
 export default function RootLayout({
@@ -23,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" data-theme="light">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

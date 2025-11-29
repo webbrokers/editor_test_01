@@ -5,23 +5,24 @@ import { useEffect, useState } from 'react';
 type Theme = 'light' | 'dark';
 
 export function useTheme() {
-    const [theme, setTheme] = useState<Theme>('light');
-    const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState<Theme>('light');
+  const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
-        setMounted(true);
-        // Получаем сохраненную тему из localStorage или используем светлую по умолчанию
-        const savedTheme = (localStorage.getItem('theme') as Theme) || 'light';
-        setTheme(savedTheme);
-        document.documentElement.setAttribute('data-theme', savedTheme);
-    }, []);
+  useEffect(() => {
+    const savedTheme = (localStorage.getItem('theme') as Theme) || 'light';
+    setTheme(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    setMounted(true);
+  }, []);
 
-    const toggleTheme = () => {
-        const newTheme: Theme = theme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
-        document.documentElement.setAttribute('data-theme', newTheme);
-    };
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
-    return { theme, toggleTheme, mounted };
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
+
+  return { theme, toggleTheme, mounted };
 }
