@@ -5,9 +5,9 @@ import { useEditorStore } from '@/hooks/useEditorStore';
 
 export default function ActionNode({ data, id, selected }: NodeProps) {
   const { setSelectedNode, deleteNode } = useEditorStore();
-  const actionData = data as ActionNodeData;
+  const actionData = (data || {}) as Partial<ActionNodeData>;
 
-  const getActionText = (type: string) => {
+  const getActionText = (type?: string) => {
     switch (type) {
       case 'add_points':
         return 'Начислить баллы';
