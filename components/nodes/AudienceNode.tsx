@@ -3,7 +3,7 @@ import { Users, X } from 'lucide-react';
 import { AudienceNodeData } from '@/types/campaign';
 import { useEditorStore } from '@/hooks/useEditorStore';
 
-export default function AudienceNode({ data, id, selected }: NodeProps<AudienceNodeData>) {
+export default function AudienceNode({ data, id, selected }: NodeProps) {
   const { setSelectedNode, deleteNode } = useEditorStore();
 
   return (

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { ReactFlow, Background, Controls, MiniMap, Panel } from '@xyflow/react';
+import { ReactFlow, Background, Controls, MiniMap, Panel, type NodeTypes } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { Save, ArrowLeft } from 'lucide-react';
 
@@ -24,7 +24,7 @@ const nodeTypes = {
   action: ActionNode,
   filter: FilterNode,
   adblock: AdBlockNode,
-};
+} satisfies NodeTypes;
 
 export default function EditorPage() {
   const params = useParams();

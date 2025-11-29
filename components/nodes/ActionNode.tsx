@@ -3,7 +3,7 @@ import { Zap, X } from 'lucide-react';
 import { ActionNodeData } from '@/types/campaign';
 import { useEditorStore } from '@/hooks/useEditorStore';
 
-export default function ActionNode({ data, id, selected }: NodeProps<ActionNodeData>) {
+export default function ActionNode({ data, id, selected }: NodeProps) {
   const { setSelectedNode, deleteNode } = useEditorStore();
 
   const getActionText = (type: string) => {

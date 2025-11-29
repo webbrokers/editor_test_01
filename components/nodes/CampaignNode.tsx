@@ -3,7 +3,7 @@ import { Calendar, X } from 'lucide-react';
 import { CampaignNodeData } from '@/types/campaign';
 import { useEditorStore } from '@/hooks/useEditorStore';
 
-export default function CampaignNode({ data, id, selected }: NodeProps<CampaignNodeData>) {
+export default function CampaignNode({ data, id, selected }: NodeProps) {
   const { setSelectedNode, deleteNode } = useEditorStore();
 
   return (
