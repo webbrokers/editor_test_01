@@ -5,6 +5,7 @@ import { useEditorStore } from '@/hooks/useEditorStore';
 
 export default function ActionNode({ data, id, selected }: NodeProps) {
   const { setSelectedNode, deleteNode } = useEditorStore();
+  const actionData = data as ActionNodeData;
 
   const getActionText = (type: string) => {
     switch (type) {
@@ -35,7 +36,7 @@ export default function ActionNode({ data, id, selected }: NodeProps) {
           </div>
           <div>
             <p className="text-xs text-foreground/50 font-medium">Действие</p>
-            <p className="font-bold text-sm">{getActionText(data.actionType)}</p>
+            <p className="font-bold text-sm">{getActionText(actionData.actionType)}</p>
           </div>
         </div>
         <button
@@ -49,10 +50,10 @@ export default function ActionNode({ data, id, selected }: NodeProps) {
         </button>
       </div>
 
-      {data.value !== undefined && (
+      {actionData.value !== undefined && (
         <div className="mt-2">
           <span className="px-3 py-1 bg-accent/20 rounded-full text-accent font-bold text-sm">
-            {data.value}
+            {actionData.value}
           </span>
         </div>
       )}
