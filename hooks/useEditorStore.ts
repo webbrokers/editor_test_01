@@ -2,22 +2,22 @@ import { create } from 'zustand';
 import { Node, Edge, Connection, addEdge, applyNodeChanges, applyEdgeChanges, NodeChange, EdgeChange } from '@xyflow/react';
 
 interface EditorStore {
-  nodes: Node[];
+  nodes: Node<Record<string, any>>[];
   edges: Edge[];
-  selectedNode: Node | null;
-  history: { nodes: Node[]; edges: Edge[] }[];
-  future: { nodes: Node[]; edges: Edge[] }[];
+  selectedNode: Node<Record<string, any>> | null;
+  history: { nodes: Node<Record<string, any>>[]; edges: Edge[] }[];
+  future: { nodes: Node<Record<string, any>>[]; edges: Edge[] }[];
 
-  setNodes: (nodes: Node[]) => void;
+  setNodes: (nodes: Node<Record<string, any>>[]) => void;
   setEdges: (edges: Edge[]) => void;
-  onNodesChange: (changes: NodeChange<Node>[]) => void;
+  onNodesChange: (changes: NodeChange<Node<Record<string, any>>>[]) => void;
   onEdgesChange: (changes: EdgeChange<Edge>[]) => void;
   onConnect: (connection: Connection) => void;
-  addNode: (node: Node) => void;
+  addNode: (node: Node<Record<string, any>>) => void;
   updateNodeData: (nodeId: string, data: any) => void;
-  setSelectedNode: (node: Node | null) => void;
+  setSelectedNode: (node: Node<Record<string, any>> | null) => void;
   deleteNode: (nodeId: string) => void;
-  resetGraph: (nodes: Node[], edges: Edge[]) => void;
+  resetGraph: (nodes: Node<Record<string, any>>[], edges: Edge[]) => void;
   undo: () => void;
   redo: () => void;
 }
@@ -126,7 +126,10 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
   },
 }));
 
-function pushHistory(history: { nodes: Node[]; edges: Edge[] }[], state: { nodes: Node[]; edges: Edge[] }) {
+function pushHistory(
+  history: { nodes: Node<Record<string, any>>[]; edges: Edge[] }[],
+  state: { nodes: Node<Record<string, any>>[]; edges: Edge[] }
+) {
   const nextHistory = [...history, cloneState(state)];
   if (nextHistory.length > HISTORY_LIMIT) {
     return nextHistory.slice(nextHistory.length - HISTORY_LIMIT);
@@ -134,7 +137,7 @@ function pushHistory(history: { nodes: Node[]; edges: Edge[] }[], state: { nodes
   return nextHistory;
 }
 
-function cloneState(state: { nodes: Node[]; edges: Edge[] }) {
+function cloneState(state: { nodes: Node<Record<string, any>>[]; edges: Edge[] }) {
   return {
     nodes: state.nodes.map((n) => ({ ...n, data: { ...n.data } })),
     edges: state.edges.map((e) => ({ ...e })),

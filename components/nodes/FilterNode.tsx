@@ -5,6 +5,7 @@ import { useEditorStore } from '@/hooks/useEditorStore';
 
 export default function FilterNode({ data, id, selected }: NodeProps) {
   const { setSelectedNode, deleteNode } = useEditorStore();
+  const filterData = (data || {}) as Partial<FilterNodeData>;
 
   return (
     <div
@@ -20,7 +21,7 @@ export default function FilterNode({ data, id, selected }: NodeProps) {
           </div>
           <div>
             <p className="text-xs text-foreground/50 font-medium">Фильтр</p>
-            <p className="font-bold text-sm">{(data as FilterNodeData).condition || 'Условие'}</p>
+            <p className="font-bold text-sm">{filterData.condition || 'Условие'}</p>
           </div>
         </div>
         <button
@@ -34,10 +35,10 @@ export default function FilterNode({ data, id, selected }: NodeProps) {
         </button>
       </div>
 
-      {(data as FilterNodeData).operator && (
+      {filterData.operator && (
         <div className="mt-2">
           <span className="px-2 py-1 bg-primary/20 rounded text-primary text-xs font-medium">
-            {(data as FilterNodeData).operator!.toUpperCase()}
+            {filterData.operator!.toUpperCase()}
           </span>
         </div>
       )}

@@ -5,6 +5,7 @@ import { useEditorStore } from '@/hooks/useEditorStore';
 
 export default function CampaignNode({ data, id, selected }: NodeProps) {
   const { setSelectedNode, deleteNode } = useEditorStore();
+  const campaignData = (data || {}) as Partial<CampaignNodeData>;
 
   return (
     <div
@@ -20,7 +21,7 @@ export default function CampaignNode({ data, id, selected }: NodeProps) {
           </div>
           <div>
             <p className="text-xs text-foreground/50 font-medium">Кампания</p>
-            <p className="font-bold text-sm">{data.name || 'Новая кампания'}</p>
+            <p className="font-bold text-sm">{campaignData.name || 'Новая кампания'}</p>
           </div>
         </div>
         <button
@@ -34,26 +35,26 @@ export default function CampaignNode({ data, id, selected }: NodeProps) {
         </button>
       </div>
 
-      {data.startDate && (
+      {campaignData.startDate && (
         <div className="text-xs text-foreground/60 mb-2">
-          <span>Старт: {new Date(data.startDate).toLocaleDateString('ru-RU')}</span>
+          <span>Старт: {new Date(campaignData.startDate).toLocaleDateString('ru-RU')}</span>
         </div>
       )}
 
-      {data.status && (
+      {campaignData.status && (
         <div className="mt-2">
           <span
             className={`px-2 py-1 rounded-full text-xs font-medium ${
-              data.status === 'active'
+              campaignData.status === 'active'
                 ? 'bg-green-500/20 text-green-400'
-                : data.status === 'paused'
+                : campaignData.status === 'paused'
                 ? 'bg-yellow-500/20 text-yellow-400'
                 : 'bg-gray-500/20 text-gray-400'
             }`}
           >
-            {data.status === 'active'
+            {campaignData.status === 'active'
               ? 'Активна'
-              : data.status === 'paused'
+              : campaignData.status === 'paused'
               ? 'Пауза'
               : 'Черновик'}
           </span>

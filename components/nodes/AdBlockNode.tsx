@@ -5,8 +5,9 @@ import { useEditorStore } from '@/hooks/useEditorStore';
 
 export default function AdBlockNode({ data, id, selected }: NodeProps) {
   const { setSelectedNode, deleteNode } = useEditorStore();
+  const adBlockData = (data || {}) as Partial<AdBlockNodeData>;
 
-  const getBlockTypeText = (type: string) => {
+  const getBlockTypeText = (type?: string) => {
     switch (type) {
       case 'popup':
         return 'Попап';
@@ -35,7 +36,7 @@ export default function AdBlockNode({ data, id, selected }: NodeProps) {
           </div>
           <div>
             <p className="text-xs text-foreground/50 font-medium">Рекламный блок</p>
-            <p className="font-bold text-sm">{getBlockTypeText((data as AdBlockNodeData).blockType)}</p>
+            <p className="font-bold text-sm">{getBlockTypeText(adBlockData.blockType)}</p>
           </div>
         </div>
         <button

@@ -5,6 +5,7 @@ import { useEditorStore } from '@/hooks/useEditorStore';
 
 export default function AudienceNode({ data, id, selected }: NodeProps) {
   const { setSelectedNode, deleteNode } = useEditorStore();
+  const audienceData = (data || {}) as Partial<AudienceNodeData>;
 
   return (
     <div
@@ -35,25 +36,25 @@ export default function AudienceNode({ data, id, selected }: NodeProps) {
       </div>
 
       <div className="space-y-2 text-xs">
-        {data.utmSource && (
+        {audienceData.utmSource && (
           <div className="flex items-center gap-2">
             <span className="text-foreground/50">UTM:</span>
-            <span className="px-2 py-0.5 bg-secondary/20 rounded text-secondary">{data.utmSource}</span>
+            <span className="px-2 py-0.5 bg-secondary/20 rounded text-secondary">{audienceData.utmSource}</span>
           </div>
         )}
-        {data.gender && data.gender !== 'all' && (
+        {audienceData.gender && audienceData.gender !== 'all' && (
           <div className="flex items-center gap-2">
             <span className="text-foreground/50">Пол:</span>
             <span className="px-2 py-0.5 bg-secondary/20 rounded text-secondary">
-              {data.gender === 'male' ? 'Мужской' : 'Женский'}
+              {audienceData.gender === 'male' ? 'Мужской' : 'Женский'}
             </span>
           </div>
         )}
-        {data.age && (
+        {audienceData.age && (
           <div className="flex items-center gap-2">
             <span className="text-foreground/50">Возраст:</span>
             <span className="px-2 py-0.5 bg-secondary/20 rounded text-secondary">
-              {data.age.min}-{data.age.max}
+              {audienceData.age.min}-{audienceData.age.max}
             </span>
           </div>
         )}
