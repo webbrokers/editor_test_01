@@ -28,7 +28,7 @@ export default function PropertiesPanel() {
         <label className="block text-sm font-medium mb-2">Название кампании</label>
         <input
           type="text"
-          value={selectedNode.data.name || ''}
+          value={(selectedNode.data as any).name || ''}
           onChange={(e) => updateNodeData(selectedNode.id, { name: e.target.value })}
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
           placeholder="Приветственная серия"
@@ -39,7 +39,7 @@ export default function PropertiesPanel() {
         <label className="block text-sm font-medium mb-2">Дата начала</label>
         <input
           type="date"
-          value={selectedNode.data.startDate || ''}
+          value={(selectedNode.data as any).startDate || ''}
           onChange={(e) => updateNodeData(selectedNode.id, { startDate: e.target.value })}
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
         />
@@ -49,7 +49,7 @@ export default function PropertiesPanel() {
         <label className="block text-sm font-medium mb-2">Дата окончания</label>
         <input
           type="date"
-          value={selectedNode.data.endDate || ''}
+          value={(selectedNode.data as any).endDate || ''}
           onChange={(e) => updateNodeData(selectedNode.id, { endDate: e.target.value })}
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
         />
@@ -58,7 +58,7 @@ export default function PropertiesPanel() {
       <div>
         <label className="block text-sm font-medium mb-2">Статус</label>
         <select
-          value={selectedNode.data.status || 'draft'}
+          value={(selectedNode.data as any).status || 'draft'}
           onChange={(e) => updateNodeData(selectedNode.id, { status: e.target.value })}
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
         >
@@ -77,7 +77,7 @@ export default function PropertiesPanel() {
         <label className="block text-sm font-medium mb-2">UTM Source</label>
         <input
           type="text"
-          value={selectedNode.data.utmSource || ''}
+          value={(selectedNode.data as any).utmSource || ''}
           onChange={(e) => updateNodeData(selectedNode.id, { utmSource: e.target.value })}
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-secondary/50"
           placeholder="google, facebook..."
@@ -87,7 +87,7 @@ export default function PropertiesPanel() {
       <div>
         <label className="block text-sm font-medium mb-2">Пол</label>
         <select
-          value={selectedNode.data.gender || 'all'}
+          value={(selectedNode.data as any).gender || 'all'}
           onChange={(e) => updateNodeData(selectedNode.id, { gender: e.target.value })}
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-secondary/50"
         >
@@ -101,7 +101,7 @@ export default function PropertiesPanel() {
         <label className="block text-sm font-medium mb-2">Возраст (мин.)</label>
         <input
           type="number"
-          value={selectedNode.data.age?.min ?? ''}
+          value={(selectedNode.data as any).age?.min ?? ''}
           onChange={(e) =>
             updateNodeData(selectedNode.id, {
               age: { ...selectedNode.data.age, min: parseInt(e.target.value) || 0 },
@@ -116,7 +116,7 @@ export default function PropertiesPanel() {
         <label className="block text-sm font-medium mb-2">Возраст (макс.)</label>
         <input
           type="number"
-          value={selectedNode.data.age?.max ?? ''}
+          value={(selectedNode.data as any).age?.max ?? ''}
           onChange={(e) =>
             updateNodeData(selectedNode.id, {
               age: { ...selectedNode.data.age, max: parseInt(e.target.value) || 100 },
@@ -134,7 +134,7 @@ export default function PropertiesPanel() {
       <div>
         <label className="block text-sm font-medium mb-2">Тип действия</label>
         <select
-          value={selectedNode.data.actionType || 'add_points'}
+          value={(selectedNode.data as any).actionType || 'add_points'}
           onChange={(e) => updateNodeData(selectedNode.id, { actionType: e.target.value })}
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-accent/50"
         >
@@ -152,7 +152,7 @@ export default function PropertiesPanel() {
           <label className="block text-sm font-medium mb-2">Значение</label>
           <input
             type="number"
-            value={selectedNode.data.value ?? ''}
+            value={(selectedNode.data as any).value ?? ''}
             onChange={(e) =>
               updateNodeData(selectedNode.id, { value: parseInt(e.target.value) || 0 })
             }
@@ -170,7 +170,7 @@ export default function PropertiesPanel() {
         <label className="block text-sm font-medium mb-2">Условие</label>
         <input
           type="text"
-          value={selectedNode.data.condition || ''}
+          value={(selectedNode.data as any).condition || ''}
           onChange={(e) => updateNodeData(selectedNode.id, { condition: e.target.value })}
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
           placeholder="Например: возраст > 18"
@@ -180,7 +180,7 @@ export default function PropertiesPanel() {
       <div>
         <label className="block text-sm font-medium mb-2">Оператор</label>
         <select
-          value={selectedNode.data.operator || 'and'}
+          value={(selectedNode.data as any).operator || 'and'}
           onChange={(e) => updateNodeData(selectedNode.id, { operator: e.target.value })}
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
         >
@@ -196,7 +196,7 @@ export default function PropertiesPanel() {
       <div>
         <label className="block text-sm font-medium mb-2">Тип блока</label>
         <select
-          value={selectedNode.data.blockType || 'popup'}
+          value={(selectedNode.data as any).blockType || 'popup'}
           onChange={(e) => updateNodeData(selectedNode.id, { blockType: e.target.value })}
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-secondary/50"
         >
@@ -210,7 +210,7 @@ export default function PropertiesPanel() {
       <div>
         <label className="block text-sm font-medium mb-2">Контент</label>
         <textarea
-          value={selectedNode.data.content || ''}
+          value={(selectedNode.data as any).content || ''}
           onChange={(e) => updateNodeData(selectedNode.id, { content: e.target.value })}
           className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-secondary/50 min-h-[100px]"
           placeholder="Текст или HTML блока"
