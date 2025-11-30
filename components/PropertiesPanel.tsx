@@ -1,223 +1,239 @@
-'use client';
+﻿'use client';
 
 import { useEditorStore } from '@/hooks/useEditorStore';
 import { X } from 'lucide-react';
+
+const inputClass =
+  'w-full px-3 py-2.5 bg-slate-50/70 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition';
+const labelClass = 'block text-sm font-medium mb-2 text-slate-700';
 
 export default function PropertiesPanel() {
   const { selectedNode, updateNodeData, setSelectedNode } = useEditorStore();
 
   if (!selectedNode) {
     return (
-      <div className="w-80 glass border-l border-white/10 p-6">
-        <div className="flex flex-col items-center justify-center h-full text-center">
-          <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
-            <span className="text-2xl">ℹ️</span>
-          </div>
-          <h3 className="text-lg font-bold mb-2">Выберите узел</h3>
-          <p className="text-sm text-foreground/60">
-            Кликните на узел в редакторе, чтобы отредактировать его свойства.
+      <div className="w-full rounded-2xl border border-slate-200 bg-white shadow-sm h-full p-6">
+        <div className="flex flex-col items-center justify-center h-full text-center gap-3">
+          <div className="w-14 h-14 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-xl">ℹ️</div>
+          <h3 className="text-lg font-semibold text-slate-900">Выберите узел</h3>
+          <p className="text-sm text-slate-600 max-w-xs">
+            Кликните по блоку на канвасе или добавьте новый из панели слева, чтобы настроить контент и логику.
           </p>
         </div>
       </div>
     );
   }
 
-  const renderCampaignProperties = () => (
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium mb-2">Название кампании</label>
-        <input
-          type="text"
-          value={(selectedNode.data as any).name || ''}
-          onChange={(e) => updateNodeData(selectedNode.id, { name: e.target.value })}
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
-          placeholder="Приветственная серия"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Дата начала</label>
-        <input
-          type="date"
-          value={(selectedNode.data as any).startDate || ''}
-          onChange={(e) => updateNodeData(selectedNode.id, { startDate: e.target.value })}
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Дата окончания</label>
-        <input
-          type="date"
-          value={(selectedNode.data as any).endDate || ''}
-          onChange={(e) => updateNodeData(selectedNode.id, { endDate: e.target.value })}
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Статус</label>
-        <select
-          value={(selectedNode.data as any).status || 'draft'}
-          onChange={(e) => updateNodeData(selectedNode.id, { status: e.target.value })}
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
-        >
-          <option value="draft">Черновик</option>
-          <option value="active">Активна</option>
-          <option value="paused">Пауза</option>
-          <option value="completed">Завершена</option>
-        </select>
-      </div>
-    </div>
-  );
-
-  const renderAudienceProperties = () => (
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium mb-2">UTM Source</label>
-        <input
-          type="text"
-          value={(selectedNode.data as any).utmSource || ''}
-          onChange={(e) => updateNodeData(selectedNode.id, { utmSource: e.target.value })}
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-secondary/50"
-          placeholder="google, facebook..."
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Пол</label>
-        <select
-          value={(selectedNode.data as any).gender || 'all'}
-          onChange={(e) => updateNodeData(selectedNode.id, { gender: e.target.value })}
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-secondary/50"
-        >
-          <option value="all">Любой</option>
-          <option value="male">Мужской</option>
-          <option value="female">Женский</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Возраст (мин.)</label>
-        <input
-          type="number"
-          value={(selectedNode.data as any).age?.min ?? ''}
-          onChange={(e) =>
-            updateNodeData(selectedNode.id, {
-              age: { ...((selectedNode.data as any)?.age || {}), min: parseInt(e.target.value) || 0 },
-            })
-          }
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-secondary/50"
-          placeholder="18"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Возраст (макс.)</label>
-        <input
-          type="number"
-          value={(selectedNode.data as any).age?.max ?? ''}
-          onChange={(e) =>
-            updateNodeData(selectedNode.id, {
-              age: { ...((selectedNode.data as any)?.age || {}), max: parseInt(e.target.value) || 100 },
-            })
-          }
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-secondary/50"
-          placeholder="65"
-        />
-      </div>
-    </div>
-  );
-
-  const renderActionProperties = () => (
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium mb-2">Тип действия</label>
-        <select
-          value={(selectedNode.data as any).actionType || 'add_points'}
-          onChange={(e) => updateNodeData(selectedNode.id, { actionType: e.target.value })}
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-accent/50"
-        >
-          <option value="add_points">Начислить баллы</option>
-          <option value="subtract_points">Списать баллы</option>
-          <option value="add_spins">Начислить спины</option>
-          <option value="level_up">Повысить уровень</option>
-        </select>
-      </div>
-
-      {(selectedNode.data.actionType === 'add_points' ||
-        selectedNode.data.actionType === 'subtract_points' ||
-        selectedNode.data.actionType === 'add_spins') && (
+  const renderCampaignProperties = () => {
+    const nodeData = (selectedNode.data as any) || {};
+    return (
+      <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-2">Значение</label>
+          <label className={labelClass}>Название кампании</label>
           <input
-            type="number"
-            value={(selectedNode.data as any).value ?? ''}
-            onChange={(e) =>
-              updateNodeData(selectedNode.id, { value: parseInt(e.target.value) || 0 })
-            }
-            className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-accent/50"
-            placeholder="100"
+            type="text"
+            value={nodeData.name || ''}
+            onChange={(e) => updateNodeData(selectedNode.id, { name: e.target.value })}
+            className={inputClass}
+            placeholder="Приветствие: бонус за регистрацию"
           />
         </div>
-      )}
-    </div>
-  );
 
-  const renderFilterProperties = () => (
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium mb-2">Условие</label>
-        <input
-          type="text"
-          value={(selectedNode.data as any).condition || ''}
-          onChange={(e) => updateNodeData(selectedNode.id, { condition: e.target.value })}
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
-          placeholder="Например: возраст > 18"
-        />
-      </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className={labelClass}>Дата начала</label>
+            <input
+              type="date"
+              value={nodeData.startDate || ''}
+              onChange={(e) => updateNodeData(selectedNode.id, { startDate: e.target.value })}
+              className={inputClass}
+            />
+          </div>
+          <div>
+            <label className={labelClass}>Дата окончания</label>
+            <input
+              type="date"
+              value={nodeData.endDate || ''}
+              onChange={(e) => updateNodeData(selectedNode.id, { endDate: e.target.value })}
+              className={inputClass}
+            />
+          </div>
+        </div>
 
-      <div>
-        <label className="block text-sm font-medium mb-2">Оператор</label>
-        <select
-          value={(selectedNode.data as any).operator || 'and'}
-          onChange={(e) => updateNodeData(selectedNode.id, { operator: e.target.value })}
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
-        >
-          <option value="and">И (AND)</option>
-          <option value="or">ИЛИ (OR)</option>
-        </select>
+        <div>
+          <label className={labelClass}>Статус</label>
+          <select
+            value={nodeData.status || 'draft'}
+            onChange={(e) => updateNodeData(selectedNode.id, { status: e.target.value })}
+            className={inputClass}
+          >
+            <option value="draft">Черновик</option>
+            <option value="active">Активна</option>
+            <option value="paused">Пауза</option>
+            <option value="completed">Завершена</option>
+          </select>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
-  const renderAdBlockProperties = () => (
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium mb-2">Тип блока</label>
-        <select
-          value={(selectedNode.data as any).blockType || 'popup'}
-          onChange={(e) => updateNodeData(selectedNode.id, { blockType: e.target.value })}
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-secondary/50"
-        >
-          <option value="popup">Попап</option>
-          <option value="banner">Баннер</option>
-          <option value="wheel">Колесо удачи</option>
-          <option value="daily_reward">Ежедневная награда</option>
-        </select>
-      </div>
+  const renderAudienceProperties = () => {
+    const nodeData = (selectedNode.data as any) || {};
+    return (
+      <div className="space-y-4">
+        <div>
+          <label className={labelClass}>UTM Source</label>
+          <input
+            type="text"
+            value={nodeData.utmSource || ''}
+            onChange={(e) => updateNodeData(selectedNode.id, { utmSource: e.target.value })}
+            className={inputClass}
+            placeholder="google, facebook, organic..."
+          />
+        </div>
 
-      <div>
-        <label className="block text-sm font-medium mb-2">Контент</label>
-        <textarea
-          value={(selectedNode.data as any).content || ''}
-          onChange={(e) => updateNodeData(selectedNode.id, { content: e.target.value })}
-          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:border-secondary/50 min-h-[100px]"
-          placeholder="Текст или HTML блока"
-        />
+        <div>
+          <label className={labelClass}>Пол</label>
+          <select
+            value={nodeData.gender || 'all'}
+            onChange={(e) => updateNodeData(selectedNode.id, { gender: e.target.value })}
+            className={inputClass}
+          >
+            <option value="all">Любой</option>
+            <option value="male">Мужской</option>
+            <option value="female">Женский</option>
+          </select>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className={labelClass}>Возраст от</label>
+            <input
+              type="number"
+              value={nodeData.age?.min ?? ''}
+              onChange={(e) =>
+                updateNodeData(selectedNode.id, {
+                  age: { ...(nodeData.age || {}), min: parseInt(e.target.value) || 0 },
+                })
+              }
+              className={inputClass}
+              placeholder="18"
+            />
+          </div>
+          <div>
+            <label className={labelClass}>Возраст до</label>
+            <input
+              type="number"
+              value={nodeData.age?.max ?? ''}
+              onChange={(e) =>
+                updateNodeData(selectedNode.id, {
+                  age: { ...(nodeData.age || {}), max: parseInt(e.target.value) || 100 },
+                })
+              }
+              className={inputClass}
+              placeholder="65"
+            />
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
+
+  const renderActionProperties = () => {
+    const nodeData = (selectedNode.data as any) || {};
+    const actionType = nodeData.actionType;
+    return (
+      <div className="space-y-4">
+        <div>
+          <label className={labelClass}>Тип действия</label>
+          <select
+            value={actionType || 'add_points'}
+            onChange={(e) => updateNodeData(selectedNode.id, { actionType: e.target.value })}
+            className={inputClass}
+          >
+            <option value="add_points">Начислить баллы</option>
+            <option value="subtract_points">Списать баллы</option>
+            <option value="add_spins">Выдать попытки</option>
+            <option value="level_up">Повысить уровень</option>
+          </select>
+        </div>
+
+        {(actionType === 'add_points' || actionType === 'subtract_points' || actionType === 'add_spins') && (
+          <div>
+            <label className={labelClass}>Значение</label>
+            <input
+              type="number"
+              value={nodeData.value ?? ''}
+              onChange={(e) => updateNodeData(selectedNode.id, { value: parseInt(e.target.value) || 0 })}
+              className={inputClass}
+              placeholder="100"
+            />
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderFilterProperties = () => {
+    const nodeData = (selectedNode.data as any) || {};
+    return (
+      <div className="space-y-4">
+        <div>
+          <label className={labelClass}>Условие</label>
+          <input
+            type="text"
+            value={nodeData.condition || ''}
+            onChange={(e) => updateNodeData(selectedNode.id, { condition: e.target.value })}
+            className={inputClass}
+            placeholder="Например: нет покупок 7 дней"
+          />
+        </div>
+
+        <div>
+          <label className={labelClass}>Оператор</label>
+          <select
+            value={nodeData.operator || 'and'}
+            onChange={(e) => updateNodeData(selectedNode.id, { operator: e.target.value })}
+            className={inputClass}
+          >
+            <option value="and">И (AND)</option>
+            <option value="or">ИЛИ (OR)</option>
+          </select>
+        </div>
+      </div>
+    );
+  };
+
+  const renderAdBlockProperties = () => {
+    const nodeData = (selectedNode.data as any) || {};
+    return (
+      <div className="space-y-4">
+        <div>
+          <label className={labelClass}>Формат блока</label>
+          <select
+            value={nodeData.blockType || 'popup'}
+            onChange={(e) => updateNodeData(selectedNode.id, { blockType: e.target.value })}
+            className={inputClass}
+          >
+            <option value="popup">Попап</option>
+            <option value="banner">Баннер</option>
+            <option value="wheel">Колесо удачи</option>
+            <option value="daily_reward">Ежедневная награда</option>
+          </select>
+        </div>
+
+        <div>
+          <label className={labelClass}>Контент</label>
+          <textarea
+            value={nodeData.content || ''}
+            onChange={(e) => updateNodeData(selectedNode.id, { content: e.target.value })}
+            className={`${inputClass} min-h-[120px]`}
+            placeholder="Текст или HTML блока"
+          />
+        </div>
+      </div>
+    );
+  };
 
   const renderProperties = () => {
     switch (selectedNode.type) {
@@ -232,19 +248,22 @@ export default function PropertiesPanel() {
       case 'adblock':
         return renderAdBlockProperties();
       default:
-        return <p className="text-sm text-foreground/50">Тип узла не поддержан.</p>;
+        return <p className="text-sm text-slate-500">Тип узла пока не поддерживается.</p>;
     }
   };
 
   return (
-    <div className="w-80 glass border-l border-white/10 p-6 overflow-y-auto">
+    <div className="w-full rounded-2xl border border-slate-200 bg-white shadow-sm h-full p-6 overflow-y-auto">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-bold">Свойства</h3>
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.08em] text-slate-500">Свойства</p>
+          <h3 className="text-lg font-semibold text-slate-900">Тонкая настройка</h3>
+        </div>
         <button
           onClick={() => setSelectedNode(null)}
-          className="p-1 hover:bg-white/10 rounded transition-colors"
+          className="p-2 rounded-lg border border-slate-200 text-slate-500 hover:text-slate-900 hover:border-slate-300"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
       </div>
 

@@ -1,4 +1,4 @@
-import { Handle, Position, NodeProps } from '@xyflow/react';
+﻿import { Handle, Position, NodeProps } from '@xyflow/react';
 import { Filter, X } from 'lucide-react';
 import { FilterNodeData } from '@/types/campaign';
 import { useEditorStore } from '@/hooks/useEditorStore';
@@ -9,19 +9,21 @@ export default function FilterNode({ data, id, selected }: NodeProps) {
 
   return (
     <div
-      className={`glass rounded-xl p-4 min-w-[280px] border-2 transition-all ${
-        selected ? 'border-primary shadow-lg shadow-primary/30' : 'border-white/10'
+      className={`rounded-2xl border px-4 py-3.5 min-w-[260px] bg-white transition-all shadow-sm ${
+        selected
+          ? 'border-amber-300 shadow-[0_14px_45px_rgba(245,158,11,0.18)] ring-2 ring-amber-100'
+          : 'border-slate-200'
       }`}
       onClick={() => setSelectedNode({ id, data, type: 'filter' } as any)}
     >
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <Filter className="w-4 h-4" />
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+            <Filter className="w-5 h-5" />
           </div>
           <div>
-            <p className="text-xs text-foreground/50 font-medium">Фильтр</p>
-            <p className="font-bold text-sm">{filterData.condition || 'Условие'}</p>
+            <p className="text-[11px] uppercase tracking-[0.08em] text-slate-500">Фильтр</p>
+            <p className="font-semibold text-slate-900 text-sm leading-snug">{filterData.condition || 'Условие'}</p>
           </div>
         </div>
         <button
@@ -29,23 +31,24 @@ export default function FilterNode({ data, id, selected }: NodeProps) {
             e.stopPropagation();
             deleteNode(id);
           }}
-          className="p-1 hover:bg-red-500/20 rounded transition-colors"
+          className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500"
         >
-          <X className="w-4 h-4 text-red-400" />
+          <X className="w-4 h-4" />
         </button>
       </div>
 
       {filterData.operator && (
-        <div className="mt-2">
-          <span className="px-2 py-1 bg-primary/20 rounded text-primary text-xs font-medium">
+        <div className="mt-3">
+          <span className="px-2.5 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-semibold border border-amber-100">
             {filterData.operator!.toUpperCase()}
           </span>
         </div>
       )}
 
-      <Handle type="target" position={Position.Left} className="w-3 h-3 !bg-primary" />
-      <Handle type="source" position={Position.Right} className="w-3 h-3 !bg-primary" />
-      <Handle type="source" position={Position.Bottom} className="w-3 h-3 !bg-primary" />
+      <Handle type="target" position={Position.Left} className="!w-3.5 !h-3.5 !bg-amber-500 !border-2 !border-white" />
+      <Handle type="source" position={Position.Right} className="!w-3.5 !h-3.5 !bg-amber-500 !border-2 !border-white" />
+      <Handle type="source" position={Position.Bottom} className="!w-3.5 !h-3.5 !bg-amber-500 !border-2 !border-white" />
     </div>
   );
 }
+
