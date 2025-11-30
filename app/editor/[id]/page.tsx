@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { ReactFlow, Background, Controls, MiniMap, Panel, type NodeTypes } from '@xyflow/react';
+import { ReactFlow, Background, BackgroundVariant, Controls, MiniMap, Panel, type NodeTypes } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import {
   Save,
@@ -297,7 +297,7 @@ export default function EditorPage() {
               multiSelectionKeyCode="Shift"
               className="!bg-transparent"
             >
-              <Background color="#d5dce6" gap={28} size={1.6} variant="dots" />
+            <Background color="#d5dce6" gap={28} size={1.6} variant={BackgroundVariant.Dots} />
               <Controls className="!bg-white !border-slate-200 !rounded-xl !shadow-md" position="bottom-left" />
               <MiniMap
                 className="!bg-white !border-slate-200 !rounded-xl !shadow-md"
