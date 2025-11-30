@@ -72,21 +72,21 @@ export default function NodeToolbar({ onAddNode, onLoadTemplate, onUndo, onRedo 
             onClick={() => onLoadTemplate('welcome')}
           >
             <p className="font-semibold text-slate-900">Приветствие: бонус за регистрацию</p>
-            <p className="text-xs text-slate-500">Кампания > Аудитория > Баллы > Попап</p>
+            <p className="text-xs text-slate-500">Кампания &gt; Аудитория &gt; Баллы &gt; Попап</p>
           </button>
           <button
             className="w-full text-left px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/60 hover:-translate-y-0.5 transition hover:shadow-sm"
             onClick={() => onLoadTemplate('retention')}
           >
             <p className="font-semibold text-slate-900">Удержание: напоминание + подарок</p>
-            <p className="text-xs text-slate-500">Фильтр по дате > Действие > Баннер</p>
+            <p className="text-xs text-slate-500">Фильтр по дате &gt; Действие &gt; Баннер</p>
           </button>
           <button
             className="w-full text-left px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/60 hover:-translate-y-0.5 transition hover:shadow-sm"
             onClick={() => onLoadTemplate('bonus')}
           >
             <p className="font-semibold text-slate-900">Бонус: колесо удачи + баллы</p>
-            <p className="text-xs text-slate-500">Колесо > Баллы > Рекламный блок</p>
+            <p className="text-xs text-slate-500">Колесо &gt; Баллы &gt; Рекламный блок</p>
           </button>
         </div>
       </div>
