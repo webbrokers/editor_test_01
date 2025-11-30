@@ -207,126 +207,130 @@ export default function EditorPage() {
   ];
 
   return (
-    <div className="h-screen flex bg-[#f4f6fb] text-slate-900">
-      <aside className="w-16 bg-[#0f172a] text-white flex flex-col justify-between items-center py-6 border-r border-white/5 shadow-[0_12px_40px_rgba(15,23,42,0.35)]">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center font-semibold">
-            LP
+    <div className="min-h-screen bg-[#e9edf5] px-6 py-6 text-slate-900">
+      <div className="max-w-[1600px] mx-auto min-h-[calc(100vh-3rem)] flex rounded-[28px] border border-slate-200 bg-white/90 shadow-[0_30px_90px_rgba(15,23,42,0.12)] overflow-hidden backdrop-blur">
+        <aside className="w-16 bg-[#0f172a] text-white flex flex-col justify-between items-center py-6 border-r border-white/5 shadow-[0_12px_40px_rgba(15,23,42,0.35)]">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center font-semibold">
+              LP
+            </div>
+            <div className="flex flex-col gap-3">
+              {railItems.map(({ icon: Icon, label }, idx) => (
+                <button
+                  key={label}
+                  className={`w-10 h-10 rounded-lg flex items-center justify-center transition hover:bg-white/10 ${
+                    idx === 0 ? 'bg-white/10 text-emerald-200' : 'text-white/80'
+                  }`}
+                  title={label}
+                >
+                  <Icon className="w-5 h-5" />
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="flex flex-col gap-3">
-            {railItems.map(({ icon: Icon, label }, idx) => (
-              <button
-                key={label}
-                className={`w-10 h-10 rounded-lg flex items-center justify-center transition hover:bg-white/10 ${
-                  idx === 0 ? 'bg-white/10 text-emerald-200' : 'text-white/80'
-                }`}
-                title={label}
-              >
-                <Icon className="w-5 h-5" />
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="flex flex-col items-center gap-3">
-          <button className="w-10 h-10 rounded-lg flex items-center justify-center bg-white/5 text-white/80 hover:bg-white/10" title="Настройки">
-            <ShieldCheck className="w-5 h-5" />
-          </button>
-          <button className="w-10 h-10 rounded-lg flex items-center justify-center bg-emerald-500 text-white hover:bg-emerald-400">
-            <Sparkles className="w-5 h-5" />
-          </button>
-        </div>
-      </aside>
-
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <div className="h-16 px-6 border-b border-slate-200 bg-white/80 backdrop-blur flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => router.push('/campaigns')}
-              className="p-2 rounded-lg border border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-900 bg-white"
-            >
-              <ArrowLeft className="w-4 h-4" />
+          <div className="flex flex-col items-center gap-3">
+            <button className="w-10 h-10 rounded-lg flex items-center justify-center bg-white/5 text-white/80 hover:bg-white/10" title="Настройки">
+              <ShieldCheck className="w-5 h-5" />
             </button>
-            <div>
-              <div className="flex items-center gap-3">
-                <h1 className="text-lg font-bold">{campaign.name}</h1>
-                <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">В разработке</span>
+            <button className="w-10 h-10 rounded-lg flex items-center justify-center bg-emerald-500 text-white hover:bg-emerald-400">
+              <Sparkles className="w-5 h-5" />
+            </button>
+          </div>
+        </aside>
+
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <div className="h-16 px-8 border-b border-slate-200 bg-white/80 backdrop-blur flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => router.push('/campaigns')}
+                className="p-2 rounded-lg border border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-900 bg-white"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </button>
+              <div>
+                <div className="flex items-center gap-3">
+                  <h1 className="text-lg font-bold">{campaign.name}</h1>
+                  <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">В разработке</span>
+                </div>
+                <div className="flex items-center gap-4 text-xs text-slate-500 mt-1">
+                  <span className="flex items-center gap-1"><Clock3 className="w-4 h-4" />Автосохранение раз в 1.5 сек</span>
+                  <span className="flex items-center gap-1"><MoreHorizontal className="w-4 h-4" />ID: {campaign.id}</span>
+                </div>
               </div>
-              <div className="flex items-center gap-4 text-xs text-slate-500 mt-1">
-                <span className="flex items-center gap-1"><Clock3 className="w-4 h-4" />Автосохранение раз в 1.5 сек</span>
-                <span className="flex items-center gap-1"><MoreHorizontal className="w-4 h-4" />ID: {campaign.id}</span>
-              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleSave}
+                disabled={isSaving}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition disabled:opacity-50"
+              >
+                <Save className="w-4 h-4" />
+                {isSaving ? 'Сохраняем...' : 'Сохранить черновик'}
+              </button>
+              <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500 text-white font-semibold shadow-[0_10px_30px_rgba(16,185,129,0.35)] hover:bg-emerald-400">
+                <Play className="w-4 h-4" />Запустить
+              </button>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              onClick={handleSave}
-              disabled={isSaving}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition disabled:opacity-50"
-            >
-              <Save className="w-4 h-4" />
-              {isSaving ? 'Сохраняем...' : 'Сохранить черновик'}
-            </button>
-            <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500 text-white font-semibold shadow-[0_10px_30px_rgba(16,185,129,0.35)] hover:bg-emerald-400">
-              <Play className="w-4 h-4" />Запустить
-            </button>
-          </div>
-        </div>
+          <div className="flex-1 flex gap-5 px-6 py-5 overflow-hidden bg-slate-50/70 min-h-0">
+            <div className="w-[320px] shrink-0">
+              <NodeToolbar onAddNode={handleAddNode} onLoadTemplate={handleLoadTemplate} onUndo={undo} onRedo={redo} />
+            </div>
 
-        <div className="flex-1 flex gap-4 px-5 py-4 overflow-hidden">
-          <div className="w-[320px] shrink-0">
-            <NodeToolbar onAddNode={handleAddNode} onLoadTemplate={handleLoadTemplate} onUndo={undo} onRedo={redo} />
-          </div>
+            <div className="flex-1 min-h-0">
+              <div className="h-full rounded-3xl border border-slate-200 bg-white shadow-[0_20px_60px_rgba(16,24,40,0.08)] overflow-hidden p-3">
+                <ReactFlow
+                  nodes={nodes}
+                  edges={edges}
+                  onNodesChange={onNodesChange}
+                  onEdgesChange={onEdgesChange}
+                  onConnect={onConnect}
+                  nodeTypes={nodeTypes}
+                  defaultEdgeOptions={{ type: 'smoothstep', style: edgeStyle }}
+                  connectionLineStyle={edgeStyle}
+                  fitView
+                  snapToGrid
+                  snapGrid={[16, 16]}
+                  selectionOnDrag
+                  panOnScroll
+                  selectionKeyCode="Shift"
+                  multiSelectionKeyCode="Shift"
+                  className="!bg-transparent h-full"
+                >
+                  <Background color="#d5dce6" gap={28} size={1.6} variant={BackgroundVariant.Dots} />
+                  <Controls className="!bg-white !border-slate-200 !rounded-xl !shadow-md" position="bottom-left" />
+                  <MiniMap
+                    className="!bg-white !border-slate-200 !rounded-xl !shadow-md"
+                    nodeColor={(node) => {
+                      switch (node.type) {
+                        case 'campaign':
+                          return '#22c55e';
+                        case 'audience':
+                          return '#0ea5e9';
+                        case 'action':
+                          return '#8b5cf6';
+                        case 'filter':
+                          return '#f59e0b';
+                        case 'adblock':
+                          return '#10b981';
+                        default:
+                          return '#22c55e';
+                      }
+                    }}
+                  />
+                  <Panel position="top-center" className="px-4 py-2 rounded-full bg-white/90 border border-slate-200 shadow-sm text-sm text-slate-600">
+                    <span className="font-semibold text-slate-900">{nodes.length}</span> узлов ·{' '}
+                    <span className="font-semibold text-slate-900">{edges.length}</span> связей
+                  </Panel>
+                </ReactFlow>
+              </div>
+            </div>
 
-          <div className="flex-1 relative rounded-3xl border border-slate-200 bg-white shadow-[0_20px_60px_rgba(16,24,40,0.08)] overflow-hidden">
-            <ReactFlow
-              nodes={nodes}
-              edges={edges}
-              onNodesChange={onNodesChange}
-              onEdgesChange={onEdgesChange}
-              onConnect={onConnect}
-              nodeTypes={nodeTypes}
-              defaultEdgeOptions={{ type: 'smoothstep', style: edgeStyle }}
-              connectionLineStyle={edgeStyle}
-              fitView
-              snapToGrid
-              snapGrid={[16, 16]}
-              selectionOnDrag
-              panOnScroll
-              selectionKeyCode="Shift"
-              multiSelectionKeyCode="Shift"
-              className="!bg-transparent"
-            >
-            <Background color="#d5dce6" gap={28} size={1.6} variant={BackgroundVariant.Dots} />
-              <Controls className="!bg-white !border-slate-200 !rounded-xl !shadow-md" position="bottom-left" />
-              <MiniMap
-                className="!bg-white !border-slate-200 !rounded-xl !shadow-md"
-                nodeColor={(node) => {
-                  switch (node.type) {
-                    case 'campaign':
-                      return '#22c55e';
-                    case 'audience':
-                      return '#0ea5e9';
-                    case 'action':
-                      return '#8b5cf6';
-                    case 'filter':
-                      return '#f59e0b';
-                    case 'adblock':
-                      return '#10b981';
-                    default:
-                      return '#22c55e';
-                  }
-                }}
-              />
-              <Panel position="top-center" className="px-4 py-2 rounded-full bg-white/90 border border-slate-200 shadow-sm text-sm text-slate-600">
-                <span className="font-semibold text-slate-900">{nodes.length}</span> узлов ·{' '}
-                <span className="font-semibold text-slate-900">{edges.length}</span> связей
-              </Panel>
-            </ReactFlow>
-          </div>
-
-          <div className="w-[360px] shrink-0">
-            <PropertiesPanel />
+            <div className="w-[360px] shrink-0 min-h-0">
+              <PropertiesPanel />
+            </div>
           </div>
         </div>
       </div>
