@@ -199,47 +199,61 @@ export default function EditorPage() {
   }
 
   const railItems = [
-    { icon: Layers, label: 'Сценарии' },
-    { icon: LayoutGrid, label: 'Библиотека' },
-    { icon: Bell, label: 'Кампании' },
-    { icon: LineChart, label: 'Аналитика' },
-    { icon: Globe2, label: 'Каналы' },
+    { icon: Layers, label: 'Сценарии', badge: 'Live' },
+    { icon: LayoutGrid, label: 'Библиотека', badge: '' },
+    { icon: Bell, label: 'Кампании', badge: '3' },
+    { icon: LineChart, label: 'Аналитика', badge: '' },
+    { icon: Globe2, label: 'Каналы', badge: '' },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f7f9fc] via-[#f4f7fb] to-[#eef3fb] text-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#f6fafc] via-[#f3f7fb] to-[#eef2f8] text-slate-900">
       <div className="h-screen flex overflow-hidden">
-        <aside className="w-[72px] bg-[#0f172a] text-white flex flex-col justify-between items-center py-6 border-r border-white/10 shadow-[0_16px_48px_rgba(15,23,42,0.35)]">
-          <div className="flex flex-col items-center gap-5">
-            <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center font-semibold shadow-inner">
+        <aside className="w-[230px] bg-white/90 backdrop-blur border-r border-slate-100 shadow-[0_20px_60px_rgba(15,23,42,0.08)] px-6 py-6 flex flex-col">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-10 h-10 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-semibold shadow-[0_10px_30px_rgba(16,185,129,0.35)]">
               LP
             </div>
-            <div className="flex flex-col gap-3">
-              {railItems.map(({ icon: Icon, label }, idx) => (
-                <button
-                  key={label}
-                  className={`w-11 h-11 rounded-xl flex items-center justify-center transition hover:bg-white/10 ${
-                    idx === 0 ? 'bg-white/10 text-emerald-200' : 'text-white/80'
-                  }`}
-                  title={label}
-                >
-                  <Icon className="w-5 h-5" />
-                </button>
-              ))}
+            <div>
+              <p className="text-xs text-slate-500">Campaign Builder</p>
+              <p className="text-base font-semibold text-slate-900">Rizz Style</p>
             </div>
           </div>
-          <div className="flex flex-col items-center gap-3">
-            <button className="w-11 h-11 rounded-xl flex items-center justify-center bg-white/5 text-white/80 hover:bg-white/10" title="Настройки">
+
+          <div className="space-y-2">
+            <p className="text-[11px] uppercase tracking-[0.08em] text-slate-400">Меню</p>
+            {railItems.map(({ icon: Icon, label, badge }, idx) => (
+              <button
+                key={label}
+                className={`w-full flex items-center justify-between gap-3 px-3 py-3 rounded-xl transition border ${
+                  idx === 0
+                    ? 'bg-emerald-50 border-emerald-100 text-emerald-700 shadow-[0_10px_28px_rgba(16,185,129,0.20)]'
+                    : 'bg-white border-slate-100 text-slate-700 hover:border-emerald-100 hover:text-emerald-700'
+                }`}
+              >
+                <span className="flex items-center gap-3">
+                  <Icon className="w-5 h-5" />
+                  <span className="text-sm font-medium">{label}</span>
+                </span>
+                {badge && <span className="text-[11px] px-2 py-1 rounded-full bg-white text-emerald-600 border border-emerald-100">{badge}</span>}
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-auto flex flex-col gap-3 pt-6 border-t border-slate-100">
+            <button className="w-full flex items-center gap-3 px-3 py-3 rounded-xl bg-white border border-slate-100 hover:border-emerald-100 text-slate-700">
               <ShieldCheck className="w-5 h-5" />
+              <span className="text-sm font-medium">Безопасность</span>
             </button>
-            <button className="w-11 h-11 rounded-xl flex items-center justify-center bg-emerald-500 text-white hover:bg-emerald-400">
+            <button className="w-full flex items-center gap-3 px-3 py-3 rounded-xl bg-emerald-500 text-white hover:bg-emerald-400 shadow-[0_12px_30px_rgba(16,185,129,0.35)]">
               <Sparkles className="w-5 h-5" />
+              <span className="text-sm font-semibold">Помощник AI</span>
             </button>
           </div>
         </aside>
 
         <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="h-16 px-7 border-b border-white/60 bg-white/90 backdrop-blur flex items-center justify-between shadow-sm">
+          <div className="h-16 px-8 border-b border-white/60 bg-white/90 backdrop-blur flex items-center justify-between shadow-sm">
             <div className="flex items-center gap-4">
               <button
                 onClick={() => router.push('/campaigns')}
@@ -274,13 +288,13 @@ export default function EditorPage() {
             </div>
           </div>
 
-          <div className="flex-1 flex gap-4 px-5 py-5 overflow-hidden">
+          <div className="flex-1 flex gap-5 px-6 py-5 overflow-hidden">
             <div className="w-[330px] shrink-0">
               <NodeToolbar onAddNode={handleAddNode} onLoadTemplate={handleLoadTemplate} onUndo={undo} onRedo={redo} />
             </div>
 
             <div className="flex-1 min-h-0">
-              <div className="h-full rounded-[26px] border border-slate-100 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.08)] overflow-hidden p-3">
+              <div className="h-full rounded-[28px] border border-slate-100 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.08)] overflow-hidden p-3">
                 <ReactFlow
                   nodes={nodes}
                   edges={edges}
