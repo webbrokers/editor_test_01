@@ -12,11 +12,11 @@ export default function PropertiesPanel() {
 
   if (!selectedNode) {
     return (
-      <div className="w-full rounded-2xl border border-slate-200 bg-white shadow-sm h-full p-6">
+      <div className="w-full rounded-2xl border border-slate-100 bg-white/95 shadow-[0_18px_60px_rgba(15,23,42,0.08)] h-full p-6">
         <div className="flex flex-col items-center justify-center h-full text-center gap-3">
-          <div className="w-14 h-14 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-xl">ℹ️</div>
+          <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl border border-emerald-100 shadow-inner">ℹ️</div>
           <h3 className="text-lg font-semibold text-slate-900">Выберите узел</h3>
-          <p className="text-sm text-slate-600 max-w-xs">
+          <p className="text-sm text-slate-600 max-w-xs leading-relaxed">
             Кликните по блоку на канвасе или добавьте новый из панели слева, чтобы настроить контент и логику.
           </p>
         </div>
@@ -253,7 +253,7 @@ export default function PropertiesPanel() {
   };
 
   return (
-    <div className="w-full rounded-2xl border border-slate-200 bg-white shadow-sm h-full p-6 overflow-y-auto">
+    <div className="w-full rounded-2xl border border-slate-100 bg-white/95 shadow-[0_18px_60px_rgba(15,23,42,0.08)] h-full p-6 overflow-y-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
           <p className="text-[11px] uppercase tracking-[0.08em] text-slate-500">Свойства</p>

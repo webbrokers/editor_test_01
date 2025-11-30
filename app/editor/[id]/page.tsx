@@ -207,18 +207,18 @@ export default function EditorPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#e9edf5] px-6 py-6 text-slate-900">
-      <div className="max-w-[1600px] mx-auto min-h-[calc(100vh-3rem)] flex rounded-[28px] border border-slate-200 bg-white/90 shadow-[0_30px_90px_rgba(15,23,42,0.12)] overflow-hidden backdrop-blur">
-        <aside className="w-16 bg-[#0f172a] text-white flex flex-col justify-between items-center py-6 border-r border-white/5 shadow-[0_12px_40px_rgba(15,23,42,0.35)]">
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center font-semibold">
+    <div className="min-h-screen bg-gradient-to-br from-[#f7f9fc] via-[#f4f7fb] to-[#eef3fb] text-slate-900">
+      <div className="h-screen flex overflow-hidden">
+        <aside className="w-[72px] bg-[#0f172a] text-white flex flex-col justify-between items-center py-6 border-r border-white/10 shadow-[0_16px_48px_rgba(15,23,42,0.35)]">
+          <div className="flex flex-col items-center gap-5">
+            <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center font-semibold shadow-inner">
               LP
             </div>
             <div className="flex flex-col gap-3">
               {railItems.map(({ icon: Icon, label }, idx) => (
                 <button
                   key={label}
-                  className={`w-10 h-10 rounded-lg flex items-center justify-center transition hover:bg-white/10 ${
+                  className={`w-11 h-11 rounded-xl flex items-center justify-center transition hover:bg-white/10 ${
                     idx === 0 ? 'bg-white/10 text-emerald-200' : 'text-white/80'
                   }`}
                   title={label}
@@ -229,27 +229,27 @@ export default function EditorPage() {
             </div>
           </div>
           <div className="flex flex-col items-center gap-3">
-            <button className="w-10 h-10 rounded-lg flex items-center justify-center bg-white/5 text-white/80 hover:bg-white/10" title="Настройки">
+            <button className="w-11 h-11 rounded-xl flex items-center justify-center bg-white/5 text-white/80 hover:bg-white/10" title="Настройки">
               <ShieldCheck className="w-5 h-5" />
             </button>
-            <button className="w-10 h-10 rounded-lg flex items-center justify-center bg-emerald-500 text-white hover:bg-emerald-400">
+            <button className="w-11 h-11 rounded-xl flex items-center justify-center bg-emerald-500 text-white hover:bg-emerald-400">
               <Sparkles className="w-5 h-5" />
             </button>
           </div>
         </aside>
 
         <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="h-16 px-8 border-b border-slate-200 bg-white/80 backdrop-blur flex items-center justify-between">
+          <div className="h-16 px-7 border-b border-white/60 bg-white/90 backdrop-blur flex items-center justify-between shadow-sm">
             <div className="flex items-center gap-4">
               <button
                 onClick={() => router.push('/campaigns')}
-                className="p-2 rounded-lg border border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-900 bg-white"
+                className="p-2 rounded-full border border-slate-200 text-slate-600 hover:border-emerald-200 hover:text-emerald-700 bg-white shadow-[0_6px_20px_rgba(15,23,42,0.06)] transition"
               >
                 <ArrowLeft className="w-4 h-4" />
               </button>
               <div>
                 <div className="flex items-center gap-3">
-                  <h1 className="text-lg font-bold">{campaign.name}</h1>
+                  <h1 className="text-lg font-semibold">{campaign.name}</h1>
                   <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">В разработке</span>
                 </div>
                 <div className="flex items-center gap-4 text-xs text-slate-500 mt-1">
@@ -263,24 +263,24 @@ export default function EditorPage() {
               <button
                 onClick={handleSave}
                 disabled={isSaving}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition disabled:opacity-50"
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 bg-white text-slate-700 hover:border-emerald-200 hover:text-emerald-700 transition shadow-[0_10px_30px_rgba(15,23,42,0.06)] disabled:opacity-60"
               >
                 <Save className="w-4 h-4" />
                 {isSaving ? 'Сохраняем...' : 'Сохранить черновик'}
               </button>
-              <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500 text-white font-semibold shadow-[0_10px_30px_rgba(16,185,129,0.35)] hover:bg-emerald-400">
+              <button className="flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-500 text-white font-semibold shadow-[0_14px_35px_rgba(16,185,129,0.35)] hover:bg-emerald-400 transition">
                 <Play className="w-4 h-4" />Запустить
               </button>
             </div>
           </div>
 
-          <div className="flex-1 flex gap-5 px-6 py-5 overflow-hidden bg-slate-50/70 min-h-0">
-            <div className="w-[320px] shrink-0">
+          <div className="flex-1 flex gap-4 px-5 py-5 overflow-hidden">
+            <div className="w-[330px] shrink-0">
               <NodeToolbar onAddNode={handleAddNode} onLoadTemplate={handleLoadTemplate} onUndo={undo} onRedo={redo} />
             </div>
 
             <div className="flex-1 min-h-0">
-              <div className="h-full rounded-3xl border border-slate-200 bg-white shadow-[0_20px_60px_rgba(16,24,40,0.08)] overflow-hidden p-3">
+              <div className="h-full rounded-[26px] border border-slate-100 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.08)] overflow-hidden p-3">
                 <ReactFlow
                   nodes={nodes}
                   edges={edges}
@@ -299,7 +299,7 @@ export default function EditorPage() {
                   multiSelectionKeyCode="Shift"
                   className="!bg-transparent h-full"
                 >
-                  <Background color="#d5dce6" gap={28} size={1.6} variant={BackgroundVariant.Dots} />
+                  <Background color="#d8dee8" gap={28} size={1.6} variant={BackgroundVariant.Dots} />
                   <Controls className="!bg-white !border-slate-200 !rounded-xl !shadow-md" position="bottom-left" />
                   <MiniMap
                     className="!bg-white !border-slate-200 !rounded-xl !shadow-md"

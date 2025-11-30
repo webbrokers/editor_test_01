@@ -29,13 +29,13 @@ interface NodeToolbarProps {
 export default function NodeToolbar({ onAddNode, onLoadTemplate, onUndo, onRedo }: NodeToolbarProps) {
   return (
     <div className="space-y-4">
-      <div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4">
+      <div className="rounded-2xl border border-slate-100 bg-white/95 shadow-[0_14px_50px_rgba(15,23,42,0.08)] p-4">
         <div className="flex items-center justify-between mb-4">
           <div>
             <p className="text-[11px] uppercase tracking-[0.08em] text-slate-500">Библиотека узлов</p>
             <h3 className="text-lg font-semibold text-slate-900">Добавить узел</h3>
           </div>
-          <span className="px-2 py-1 rounded-full bg-slate-100 text-slate-600 text-[11px] font-semibold">Shift = выбор</span>
+          <span className="px-2 py-1 rounded-full bg-slate-50 text-slate-600 text-[11px] font-semibold border border-slate-100">Shift = выбор</span>
         </div>
 
         <div className="space-y-3">
@@ -46,7 +46,7 @@ export default function NodeToolbar({ onAddNode, onLoadTemplate, onUndo, onRedo 
               <button
                 key={node.type}
                 onClick={() => onAddNode(node.type)}
-                className="w-full flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50/70 px-3.5 py-3 transition hover:-translate-y-0.5 hover:shadow-md"
+                className="w-full flex items-start gap-3 rounded-2xl border border-slate-100 bg-white px-3.5 py-3 transition hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(15,23,42,0.12)] text-left"
               >
                 <div className={`w-12 h-12 rounded-xl ${tone.bg} ${tone.text} flex items-center justify-center text-lg font-semibold`}> 
                   <Icon className="w-5 h-5" />
@@ -61,28 +61,28 @@ export default function NodeToolbar({ onAddNode, onLoadTemplate, onUndo, onRedo 
         </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4">
+      <div className="rounded-2xl border border-slate-100 bg-white/95 shadow-[0_14px_50px_rgba(15,23,42,0.08)] p-4">
         <div className="flex items-center justify-between mb-3">
           <h4 className="text-sm font-semibold text-slate-900">Шаблоны графа</h4>
           <span className="text-xs text-slate-500">1 клик = загрузить</span>
         </div>
         <div className="space-y-2">
           <button
-            className="w-full text-left px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/60 hover:-translate-y-0.5 transition hover:shadow-sm"
+            className="w-full text-left px-4 py-3 rounded-xl border border-slate-100 bg-white hover:-translate-y-0.5 transition hover:shadow-[0_10px_26px_rgba(15,23,42,0.08)]"
             onClick={() => onLoadTemplate('welcome')}
           >
             <p className="font-semibold text-slate-900">Приветствие: бонус за регистрацию</p>
             <p className="text-xs text-slate-500">Кампания &gt; Аудитория &gt; Баллы &gt; Попап</p>
           </button>
           <button
-            className="w-full text-left px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/60 hover:-translate-y-0.5 transition hover:shadow-sm"
+            className="w-full text-left px-4 py-3 rounded-xl border border-slate-100 bg-white hover:-translate-y-0.5 transition hover:shadow-[0_10px_26px_rgba(15,23,42,0.08)]"
             onClick={() => onLoadTemplate('retention')}
           >
             <p className="font-semibold text-slate-900">Удержание: напоминание + подарок</p>
             <p className="text-xs text-slate-500">Фильтр по дате &gt; Действие &gt; Баннер</p>
           </button>
           <button
-            className="w-full text-left px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/60 hover:-translate-y-0.5 transition hover:shadow-sm"
+            className="w-full text-left px-4 py-3 rounded-xl border border-slate-100 bg-white hover:-translate-y-0.5 transition hover:shadow-[0_10px_26px_rgba(15,23,42,0.08)]"
             onClick={() => onLoadTemplate('bonus')}
           >
             <p className="font-semibold text-slate-900">Бонус: колесо удачи + баллы</p>
@@ -91,19 +91,19 @@ export default function NodeToolbar({ onAddNode, onLoadTemplate, onUndo, onRedo 
         </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4 space-y-3">
+      <div className="rounded-2xl border border-slate-100 bg-white/95 shadow-[0_14px_50px_rgba(15,23,42,0.08)] p-4 space-y-3">
         <p className="text-sm font-semibold text-slate-900">История</p>
         <div className="flex gap-2">
           <button
             onClick={onUndo}
-            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 transition"
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl border border-slate-100 bg-white hover:border-emerald-100 hover:text-emerald-700 transition"
           >
             <RotateCcw className="w-4 h-4" />
             Отменить
           </button>
           <button
             onClick={onRedo}
-            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 transition"
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl border border-slate-100 bg-white hover:border-emerald-100 hover:text-emerald-700 transition"
           >
             <RotateCw className="w-4 h-4" />
             Повторить
@@ -111,7 +111,7 @@ export default function NodeToolbar({ onAddNode, onLoadTemplate, onUndo, onRedo 
         </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-4">
+      <div className="rounded-2xl border border-slate-100 bg-gradient-to-br from-white to-slate-50/70 p-4 shadow-[0_14px_50px_rgba(15,23,42,0.08)]">
         <p className="text-xs text-slate-500 mb-2">Подсказка</p>
         <p className="text-sm text-slate-600 leading-relaxed">
           Выделяйте несколько узлов через Shift и рамку. Отключите привязку к сетке, если нужна свободная схема, либо держите включённой — связи будут ровнее.
@@ -120,4 +120,3 @@ export default function NodeToolbar({ onAddNode, onLoadTemplate, onUndo, onRedo 
     </div>
   );
 }
-
